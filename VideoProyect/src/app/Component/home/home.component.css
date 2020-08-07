@@ -1,0 +1,13 @@
+.hero{
+    height: 300px;
+    background-color: #1b2127; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: -1px 6px 8px black;
+  
+}
+.hero h1{
+    color: white;
+    font-size: 50px;
+}
