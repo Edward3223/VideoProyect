@@ -1,0 +1,36 @@
+<div class="body">
+   
+   <div class="centeredContent">
+
+   
+
+    <div *ngIf="!finalizado" class="instructions">
+        <img style="width: 245px;" src="../../../assets/uploadVideo.png" alt="">
+            <h3>Subir video:</h3>
+            <p>Tus videos serán privados hasta que los publiques.</p>
+            <input #fileInput type="file" accept='video/*' (change)="cambioArchivo($event)" style="display: none;">
+            <button [disabled]="loading" (click) = "fileInput.click() "mat-raised-button color="warn">Seleccionar Archivo</button>
+            <span *ngIf="nombreArchivo">Nombre de Archivo: {{nombreArchivo}}</span>
+
+            <button [disabled]="loading" *ngIf="nombreArchivo" (click) = "subirArchivo()"mat-raised-button color="warn">Subir Video</button>
+
+            <mat-progress-bar *ngIf="porcentaje && loading" color ="warn" model="determinate" [value]="porcentaje"></mat-progress-bar>
+    </div>
+
+
+    <div *ngIf="finalizado" class="uploadOk">
+        <button class="success" mat-fab color="warn" aria-label="Example icon button with a home icon">
+            <mat-icon>check_circle_outline</mat-icon>
+          </button>
+        <h2>Felicidades!</h2>
+        <h3>Tu video se ha cargado satisfactoriamente!</h3>
+        <button  routerLink="/home" routerLinkActive="active" mat-raised-button color="warn">Ir a Inicio</button>
+
+    </div>
+        
+   </div>
+
+
+
+</div>
+
