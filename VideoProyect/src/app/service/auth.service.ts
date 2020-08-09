@@ -28,6 +28,8 @@ export class AuthService {
 
   logOut(){
 
+    localStorage.removeItem('token')
+
   }
 
   logIn( Profile: User ){
@@ -85,6 +87,10 @@ export class AuthService {
 
     return this.userToken;
 
+  }
+
+  authentication(){
+    return this.userToken.length > 2 
   }
 
 }

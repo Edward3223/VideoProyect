@@ -11,13 +11,32 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  usuario: User;
+  usuario: User = new User;
+  recuerdame = false;
+  Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    onOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
 
   constructor( private auth: AuthService, private routes: Router ) { }
 
   ngOnInit(): void {
 
-    this.usuario = new User()
+    
+    if ( localStorage.getItem('email') ) {
+      this.usuario.Email = localStorage.getItem('email');
+      this.recuerdame = true;
+    }
+    else if(!this.recuerdame){
+      localStorage.removeItem('email')
+    }
   }
 
   Login(){
@@ -28,11 +47,22 @@ export class LoginComponent implements OnInit {
     });
     Swal.showLoading();
 
+    if ( this.recuerdame ) {
+      localStorage.setItem('email', this.usuario.Email);
+    }
+    else{
+      localStorage.removeItem('email')
+    }
+
 
     this.auth.logIn(this.usuario).subscribe(resp =>{
       console.log(resp)
       Swal.close()
       this.routes.navigateByUrl('/home')
+      this.Toast.fire({
+        icon: 'success',
+        title: 'Signed in successfully'
+      })
 
     }, (err)=>{
 

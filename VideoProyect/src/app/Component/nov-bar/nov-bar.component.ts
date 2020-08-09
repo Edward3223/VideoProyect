@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nov-bar',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NovBarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private auth: AuthService, private routes: Router) { }
 
   ngOnInit(): void {
+  }
+
+  sigout(){
+    this.auth.logOut()
+    this.routes.navigateByUrl('/login')
+    
   }
 
 }
