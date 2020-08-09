@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { FileService } from 'src/app/service/file.service';
-
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-upload-video',
   templateUrl: './upload-video.component.html',
@@ -9,56 +9,44 @@ import { FileService } from 'src/app/service/file.service';
 })
 export class UploadVideoComponent implements OnInit {
 
-  constructor(private fileService:FileService) { }
+  SERVER_URL = "https://us-central1-fir-test-1fbec.cloudfunctions.net/main/api/video";
+  uploadForm: FormGroup; 
+  loading = false;
+  finished = false;
+  fileName:string ='';
+  constructor(private formBuilder: FormBuilder, private httpClient: HttpClient) { }
 
   ngOnInit(): void {
+
+    this.uploadForm = this.formBuilder.group({
+      profile: ['']
+    });
   }
 
   public archivoForm = new FormGroup({
     archivo: new FormControl(null, Validators.required),
   });
   
-  public mensajeArchivo = 'No hay un archivo seleccionado';
-  public datosFormulario = new FormData();
-  public nombreArchivo = '';
-  public URLPublica = '';
-  public porcentaje = 0;
-  public finalizado = false;
-  loading = false;
-
-
-
-  public cambioArchivo(event) {
+  onFileSelect(event) {
     if (event.target.files.length > 0) {
       for (let i = 0; i < event.target.files.length; i++) {
-        this.nombreArchivo = event.target.files[i].name;
-        this.datosFormulario.delete('archivo');
-        this.datosFormulario.append('archivo', event.target.files[i], event.target.files[i].name)
+        this.fileName = event.target.files[i].name;
+      
       }
-    } else {
-      this.mensajeArchivo = 'No hay un archivo seleccionado';
+      const file = event.target.files[0];
+      this.uploadForm.get('profile').setValue(file);
     }
   }
 
-  public subirArchivo() {
-    let archivo = this.datosFormulario.get('archivo');
-    let referencia = this.fileService.referenciaCloudStorage(this.nombreArchivo);
-    let tarea = this.fileService.tareaCloudStorage(this.nombreArchivo, archivo);
+  onSubmit() {
+    this.loading = true;
+    const formData = new FormData();
+    formData.append('file', this.uploadForm.get('profile').value);
 
-    //Cambia el porcentaje
-    tarea.percentageChanges().subscribe((porcentaje) => {
-      this.loading =  true;
-      this.porcentaje = Math.round(porcentaje);
-      if (this.porcentaje == 100) {
-        this.loading =  false;
-        this.finalizado = true;
-        
-      }
-    });
-
-    referencia.getDownloadURL().subscribe((URL) => {
-      this.URLPublica = URL;
-    });
+    this.httpClient.post<any>(this.SERVER_URL, formData).subscribe(
+      (res) => {console.log(res); this.loading = false; this.finished = true;},
+      (err) => {console.log(err); this.loading = false}
+    );
   }
 
 

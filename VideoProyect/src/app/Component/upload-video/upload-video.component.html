@@ -4,21 +4,22 @@
 
    
 
-    <div *ngIf="!finalizado" class="instructions">
+    <div *ngIf="!finished" class="instructions">
+        <mat-spinner [diameter] = "150" color="warn" *ngIf="loading" id="loadingCircle"></mat-spinner>
         <img style="width: 245px;" src="../../../assets/uploadVideo.png" alt="">
             <h3>Subir video:</h3>
             <p>Tus videos serán privados hasta que los publiques.</p>
-            <input #fileInput type="file" accept='video/*' (change)="cambioArchivo($event)" style="display: none;">
-            <button [disabled]="loading" (click) = "fileInput.click() "mat-raised-button color="warn">Seleccionar Archivo</button>
-            <span *ngIf="nombreArchivo">Nombre de Archivo: {{nombreArchivo}}</span>
+            <form [formGroup] = "uploadForm" style="display: contents;" (ngSubmit)="onSubmit()">   
+                <input #fileInput type="file" accept='video/*' (change)="onFileSelect($event)" style="display: none;">
+                <button [disabled]="loading" type="button" (click) = "fileInput.click() "mat-raised-button color="warn">Seleccionar Archivo</button>
+                <span *ngIf="fileName">Nombre de Archivo: {{fileName}}</span>
 
-            <button [disabled]="loading" *ngIf="nombreArchivo" (click) = "subirArchivo()"mat-raised-button color="warn">Subir Video</button>
-
-            <mat-progress-bar *ngIf="porcentaje && loading" color ="warn" model="determinate" [value]="porcentaje"></mat-progress-bar>
+                <button [disabled]="loading" *ngIf="fileName" type= "submit" mat-raised-button color="warn">Subir Video</button>
+            </form>
     </div>
 
 
-    <div *ngIf="finalizado" class="uploadOk">
+    <div *ngIf="finished" class="uploadOk">
         <button class="success" mat-fab color="warn" aria-label="Example icon button with a home icon">
             <mat-icon>check_circle_outline</mat-icon>
           </button>

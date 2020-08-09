@@ -47,3 +47,12 @@
         height: 66px;
         width: 79px;
 }
+
+#loadingCircle{
+    z-index: 1;
+    position: absolute;
+    left: 48%;
+    margin-left: -50px;
+    top: 50%;
+    margin-top: -50px;
+  }

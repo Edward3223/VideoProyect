@@ -15,3 +15,32 @@
     font-size: 50px;
 }
 
+#videoCards{
+    padding-top: 30px;
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+    height: 100vh;
+}
+
+
+.example-card {
+  width: 260px;
+  margin-left: 30px;
+  margin-bottom: 30px;
+
+  }
+  
+  .example-header-image {
+    /* background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg'); */
+    background-size: cover;
+  }
+
+
+  mat-card:hover{
+        background-color: rgba(0, 0, 0, 0.192);
+  }
+
+  mat-card{
+    cursor: pointer;
+  }
