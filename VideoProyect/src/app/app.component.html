@@ -1,7 +1,7 @@
 
 <mat-drawer-container class="example-container" autosize>
-    <mat-drawer #drawer class="example-sidenav" mode="over">
-        <mat-selection-list [multiple]="false">
+    <mat-drawer  #drawer class="example-sidenav" mode="over">
+        <mat-selection-list *ngIf="authenticationDrawer()"  [multiple]="false">
             <mat-list-item>
               <div mat-line>MyTube</div>
             </mat-list-item>
@@ -12,9 +12,14 @@
        
             </mat-list-option>
 
-            <mat-list-option routerLink="/video-upload" routerLinkActive="active" >
+            <mat-list-option  routerLink="/video-upload" routerLinkActive="active" >
                 <mat-icon mat-list-icon>upgrade</mat-icon>
                 <div mat-line>Subir Video</div>
+         
+              </mat-list-option>
+              <mat-list-option (click)="sigout()" routerLinkActive="active" >
+                <mat-icon mat-list-icon>exit_to_app</mat-icon>
+                <div mat-line>Salir</div>
          
               </mat-list-option>
           </mat-selection-list>
@@ -22,8 +27,8 @@
 
 
 
-    <mat-toolbar>
-        <button mat-icon-button (click)="drawer.toggle()" class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-toolbar >
+        <button *ngIf="authenticationDrawer()" mat-icon-button (click)="drawer.toggle()" class="example-icon" aria-label="Example icon-button with menu icon">
           <mat-icon>menu</mat-icon>
         </button>
         <span>MyTube</span>
@@ -37,7 +42,7 @@
       </mat-toolbar>
 
     
-      
+<mat-drawer-container>
 <router-outlet></router-outlet>
 
-</mat-drawer-container>
+

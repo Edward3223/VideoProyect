@@ -17,7 +17,6 @@ export class NovBarComponent implements OnInit {
   sigout(){
     this.auth.logOut()
     this.routes.navigateByUrl('/login')
-    
   }
 
 }

@@ -1,0 +1,32 @@
+
+.example-spacer {
+    flex: 1 1 auto;
+  }
+
+
+
+ *:focus {
+    outline: 0 !important;
+}
+
+.example-sidenav-content {
+    display: flex;
+    height: 100%;
+   
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .example-sidenav {
+    padding: 20px;
+    width: 25%;
+    
+  }
+
+  :host {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+  }

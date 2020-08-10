@@ -1,19 +1,46 @@
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="#"><strong>Proyect Videos</strong></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="over">
+      <mat-selection-list [multiple]="false">
+          <mat-list-item>
+            <div mat-line>MyTube</div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-option  routerLink="/home" routerLinkActive="active"  >
+            <mat-icon mat-list-icon>home</mat-icon>
+            <div mat-line>Principal</div>
+     
+          </mat-list-option>
+
+          <mat-list-option routerLink="/video-upload" routerLinkActive="active" >
+              <mat-icon mat-list-icon>upgrade</mat-icon>
+              <div mat-line>Subir Video</div>
+       
+            </mat-list-option>
+            <mat-list-option (click)="sigout()" routerLink="/login" routerLinkActive="active" >
+              <mat-icon mat-list-icon>exit_to_app</mat-icon>
+              <div mat-line>Salir</div>
+       
+            </mat-list-option>
+        </mat-selection-list>
+  </mat-drawer>
+
+
+
+  <mat-toolbar>
+      <button mat-icon-button (click)="drawer.toggle()" class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
       </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#"> Hello variable!</a>
-          </li>
-          <li class="nav-item active">
-            <button (click)="sigout()"  class="btn-danger btn"> Logout <span class="sr-only">(current)</span></button>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </header>
+      <span>MyTube</span>
+      <span class="example-spacer"></span>
+      <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+        <mat-icon>favorite</mat-icon>
+      </button>
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+        <mat-icon>share</mat-icon>
+      </button>
+    </mat-toolbar>
+
+  
+
+</mat-drawer-container>

@@ -90,6 +90,7 @@ export class AuthService {
   }
 
   authentication(){
+    //si hay token retunr true en caso contrario false
     return this.userToken.length > 2 
   }
 
