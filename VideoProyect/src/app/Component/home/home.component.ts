@@ -1,13 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< HEAD
-import Swal from 'sweetalert2'
-import { AuthService } from 'src/app/service/auth.service';
-=======
 import { AngularFireStorage } from '@angular/fire/storage';
 import { storage } from 'firebase';
 import * as firebase from 'firebase';
 import { Router, ActivatedRoute } from '@angular/router';
->>>>>>> origin/videoUpload
 
 @Component({
   selector: 'app-home',
@@ -16,17 +11,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-<<<<<<< HEAD
-  constructor(private auth: AuthService) { }
-
-
-
-  ngOnInit(): void {
-      
-  }
-
-
-=======
 
   storageVideos = [];
 
@@ -70,6 +54,5 @@ export class HomeComponent implements OnInit {
   }
 
   
->>>>>>> origin/videoUpload
 
 }
