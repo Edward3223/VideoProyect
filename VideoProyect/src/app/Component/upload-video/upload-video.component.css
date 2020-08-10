@@ -1,0 +1,58 @@
+.body {
+    height: 100vh;
+}
+
+.centeredContent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 70%;
+}
+
+.instructions{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.instructions button, span{
+    margin-bottom: 15px;
+}
+
+.uploadOk{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 30px;
+
+}
+
+.uploadOk button, span{
+    margin-bottom: 15px;
+}
+
+.uploadOk .success{
+        width: 115px;
+        height: 115px;
+}
+
+.success mat-icon{
+        font-size: 67px;
+        height: 66px;
+        width: 79px;
+}
+
+#loadingCircle{
+    z-index: 1;
+    position: absolute;
+    left: 48%;
+    margin-left: -50px;
+    top: 50%;
+    margin-top: -50px;
+  }
